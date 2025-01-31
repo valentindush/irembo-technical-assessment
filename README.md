@@ -1,36 +1,202 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RICA Import Permit
+
+RICA Import Permit Application form **IREMBO TECHNICAL ASSESSMENT**[Jan 31st 2025].
+ Below are the steps to set up and run the project locally using `pnpm`, `npm`, `yarn`, or Docker.
+
+---
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [pnpm](https://pnpm.io/) (optional)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+- [yarn](https://yarnpkg.com/) (optional)
+- [Docker](https://www.docker.com/) (optional, for Docker setup)
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/valentindush/<thisrepo>.git
+cd <this-repo>
+```
+
+---
+
+### 2. Install Dependencies
+
+You can use `pnpm`, `npm`, or `yarn` to install dependencies.
+
+#### Using `pnpm`
+
+```bash
+pnpm install
+```
+
+#### Using `npm`
+
+```bash
+npm install
+```
+
+#### Using `yarn`
+
+```bash
+yarn install
+```
+
+---
+
+### 3. Run the Development Server
+
+Start the development server to preview the application.
+
+#### Using `pnpm`
+
+```bash
+pnpm dev
+```
+
+#### Using `npm`
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Using `yarn`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application will be available at `http://localhost:3000`.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Build the Project
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To build the project for production, run:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### Using `pnpm`
 
-## Deploy on Vercel
+```bash
+pnpm build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Using `npm`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+```
+
+#### Using `yarn`
+
+```bash
+yarn build
+```
+
+---
+
+### 5. Start the Production Server
+
+After building the project, start the production server:
+
+#### Using `pnpm`
+
+```bash
+pnpm start
+```
+
+#### Using `npm`
+
+```bash
+npm start
+```
+
+#### Using `yarn`
+
+```bash
+yarn start
+```
+
+The production application will be available at `http://localhost:3000`.
+
+---
+
+## Running with Docker
+
+If you prefer to run the project using Docker, follow these steps:
+
+### 1. Build the Docker Image
+
+```bash
+docker build -t rica .
+```
+
+- `-t rica`: Tags the image with the name `rica`.
+
+### 2. Run the Docker Container
+
+```bash
+docker run -p 3000:3000 rica
+```
+
+- `-p 3000:3000`: Maps port 3000 on your local machine to port 3000 in the container.
+
+The application will be available at `http://localhost:3000`.
+
+---
+
+### 3. Using Docker Compose (Optional)
+
+If you prefer to use Docker Compose, follow these steps:
+
+1. Ensure you have a `docker-compose.yml` file in your project root.
+2. Run the following command:
+
+```bash
+docker-compose up
+```
+
+The application will be available at `http://localhost:3000`.
+
+---
+
+## Environment Variables
+
+To configure environment variables, create a `.env` file in the root of your project:
+
+```plaintext
+SENDGRID_API_KEY=<sendgrid_api_key>
+SENDGRID_FROM_EMAIL=<email>
+```
+
+---
+
+## Scripts
+
+Here are the available scripts in the `package.json` file:
+
+- `dev`: Starts the development server.
+- `build`: Builds the project for production.
+- `start`: Starts the production server.
+- `lint`: Runs ESLint to check for code issues.
+
+---
+
+## Contributing
+
+If you'd like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeatureName`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeatureName`).
+5. Open a pull request.
+
+---

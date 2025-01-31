@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import sgMail from "@sendgrid/mail";
 import { format } from "date-fns";
-import { formSchema, type FormValues } from "@/lib/schemas";
+import {type FormValues } from "@/lib/schemas";
 import { RicaTemplate } from "../util/templates/rica";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
