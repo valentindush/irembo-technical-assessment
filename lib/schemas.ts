@@ -5,7 +5,7 @@ export const formSchema = z.object({
     citizenship: z.enum(["Rwandan", "Foreigner"], {
         required_error: "This field is required",
     }),
-    identificationDocumentNumber: z.string().optional(),
+    identificationDocumentNumber: z.string().regex(/^\d{16}$/,"ID number must be 16 digits").optional(),
     passportNumber: z.string().optional(),
     otherNames: z.string({ required_error: "This field is required" }).min(1, "This field is required"),
     surname: z.string({ required_error: "This field is required" }).min(1, "This field is required"),
@@ -38,12 +38,8 @@ export const formSchema = z.object({
     unit: z.enum(["Kgs", "Tonnes"], { required_error: "This field is required" }),
     quantity: z.number({ required_error: "This field is required" }).min(1, "Please provide a number greater than zero"),
 }).superRefine((data, ctx) => {
-    if (data.importPurpose === "Other") {
-        ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "This field is required"
-        });
-    }
+
+    console.log('super refined triggered')
 
     if (data.citizenship === 'Rwandan') {
         if (!data.identificationDocumentNumber) {
@@ -55,7 +51,7 @@ export const formSchema = z.object({
         } else if (!/^\d{16}$/.test(data.identificationDocumentNumber)) {
             ctx.addIssue({
                 code: z.ZodIssueCode.custom,
-                message: 'Id number must be 16 digits',
+                message: 'ID number must be 16 digits',
                 path: ['identificationDocumentNumber']
             });
         }
@@ -68,7 +64,21 @@ export const formSchema = z.object({
                 message: 'This field is required',
                 path: ['passportNumber']
             });
+        } else if (!/^[A-Za-z0-9]{6,}$/.test(data.passportNumber)) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: 'Invalid passport number format',
+                path: ['passportNumber']
+            });
         }
+    }
+
+    if (data.importPurpose === "Other" && !data.specifyPurpose) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "This field is required",
+            path: ['specifyPurpose']
+        });
     }
 });
 export type FormValues = z.infer<typeof formSchema>;

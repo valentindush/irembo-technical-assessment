@@ -26,7 +26,7 @@ export function RicaForm() {
     const form = useForm<z.infer<typeof formSchema>>({
         shouldUnregister: false,
         resolver: zodResolver(formSchema),
-        mode: "onChange",
+        mode: "onBlur",
         defaultValues: {
             citizenship: undefined,
             identificationDocumentNumber: "",
@@ -63,19 +63,29 @@ export function RicaForm() {
 
     async function handleNext() {
         const fields = steps[currentStep - 1].fields;
+        
+        if (citizenship === 'Rwandan') {
+            fields.push('identificationDocumentNumber');
+        } else if (citizenship === 'Foreigner') {
+            fields.push('passportNumber');
+        }
+    
+        if (importPurpose === 'Other') {
+            fields.push('specifyPurpose');
+        }
+    
         fields.forEach(field => {
             if (!touchedFields.includes(field)) {
                 form.trigger(field as any);
             }
         });
         setTouchedFields(prev => [...prev, ...fields]);
-
+    
         const isValid = await form.trigger(fields as any);
         if (isValid) {
             setCurrentStep(prev => Math.min(prev + 1, steps.length));
         }
     }
-
     function handlePrev() {
         setCurrentStep(prev => Math.max(prev - 1, 1));
     }
@@ -194,6 +204,7 @@ export function RicaForm() {
                                     <FormControl>
                                         <Input
                                             {...field}
+                                            type="number"
                                             placeholder="Enter identification document number"
                                             value={field.value || ""}
                                             onChange={(e) => {
@@ -218,6 +229,7 @@ export function RicaForm() {
                                     <FormControl>
                                         <Input
                                             {...field}
+                                            type="number"
                                             placeholder=""
                                             value={field.value || ""}
                                             onChange={(e) => {
