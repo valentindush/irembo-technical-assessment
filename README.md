@@ -156,8 +156,7 @@ The application will be available at `http://localhost:3000`.
 
 If you prefer to use Docker Compose, follow these steps:
 
-1. Ensure you have a `docker-compose.yml` file in your project root.
-2. Run the following command:
+1. Run the following command:
 
 ```bash
 docker-compose up
