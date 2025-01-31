@@ -163,7 +163,7 @@ If you prefer to use Docker Compose, follow these steps:
 docker-compose up
 ```
 
-The application will be available at `http://localhost:3000`.
+The application will be available at `http://localhost:3003`.
 
 ---
 

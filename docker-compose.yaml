@@ -1,14 +1,8 @@
 services:
-  app:
-    image: rica
+  rica-app:
     build:
       context: .
       dockerfile: Dockerfile
+    image: rica
     ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-    env_file:
-      - .env
-    volumes:
-      - .:/app
+      - "3003:3000"
